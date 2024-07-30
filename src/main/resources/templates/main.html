@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Panel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+      }
+      .navbar a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+      }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      .container {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/main">
+      <div class="navbar">
+        <a href="insert.html">Insert</a>
+        <a href="fetch.html">Fetch</a>
+        <a href="edit.html">Edit</a>
+        <a href="delete.html">Delete</a>
+        <a href="logout.html">Logout</a>
+      </div>
+    </form>
+    <h1 th:text="${message}"></h1>
+    <div class="container">
+      <h1>Welcome to the Control Panel</h1>
+      <p>Use the navigation links above to perform various actions.</p>
+    </div>
+  </body>
+</html>

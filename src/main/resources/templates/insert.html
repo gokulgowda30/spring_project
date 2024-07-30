@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insert Data</title>
+    <!-- <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f2f2f2;
+      }
+      .insert-form {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px; /* Limit the width for larger screens */
+        box-sizing: border-box;
+      }
+      .insert-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .insert-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      .insert-form input[type="text"],
+      .insert-form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+      }
+      .insert-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .insert-form button:hover {
+        background-color: #45a049;
+      }
+    </style> -->
+  </head>
+  <body>
+    <form
+      class="insert-form"
+      action="/insert"
+      method="POST"
+      enctype="multipart/form-data"
+      center
+    >
+      <!--enctype="multipart/form-data" help to carry the image from the form-->
+      <h2>Insert Data</h2>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter Name"
+        required
+      />
+      <br />
+      <label for="standard">Standard</label>
+      <input
+        type="number"
+        id="standard"
+        name="standard"
+        placeholder="Enter Standard"
+        required
+      />
+      <br />
+      <label for="dob">Date Of Birth</label>
+      <input
+        type="date"
+        id="dob"
+        name="dob"
+        placeholder="Enter Date Of Birth"
+        required
+      />
+      <br />
+      <label for="mobile">Mobile</label>
+      <input
+        type="tel"
+        id="moblile"
+        name="mobile"
+        placeholder="Enter Mobile Number"
+        required
+      />
+      <br />
+      Marks:
+      <br />
+      <label for="subject1">Subject 1</label>
+      <input type="text" id="subject1" name="subject1" required />
+      <br />
+      <label for="subject2">Subject 2</label>
+      <input type="text" id="subject2" name="subject2" required />
+      <br />
+      <label for="subject3">Subject 3</label>
+      <input type="text" id="subject3" name="subject3" required />
+      <br />
+      <label for="subject4">Subject 4</label>
+      <input type="text" id="subject4" name="subject4" required />
+      <br />
+      <label for="subject5">Subject 5</label>
+      <input type="text" id="subject5" name="subject5" required />
+      <br />
+      <label for="subject6">Subject 6</label>
+      <input type="text" id="subject6" name="subject6" required />
+      <br />
+      <label for="image">Picture</label>
+      <input type="file" id="image" name="image" accept="image/*" />
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

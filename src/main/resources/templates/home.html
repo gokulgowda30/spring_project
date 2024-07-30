@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+      }
+      .navbar a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+      }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!--If there is a no user in the session the execute this-->
+    <div class="navbar" th:if="${session.user==null}">
+      <!--We cant take file name(signup.html) in the href directly because we have added thymleaf dependency insetad we write the path-->
+
+      <a href="/signup"><button>Signup</button></a>
+      <a href="/login"><button>Login</button></a>
+    </div>
+    <h3 style="color: greenyellow" th:text="${success}"></h3>
+    <div class="" th:if="${session.user}">
+      <!--If there is a user in the session the execute this-->
+      <a href="/insert"><button>Student Record</button></a>
+      <a href="/fetch"><button>Fetch Student Record</button></a>
+      <a href="/delete"><button>Delete Student Record</button></a>
+      <a href="/update"><button>Update Student Record</button></a>
+      <a href="/logout"><button>Logout</button></a>
+    </div>
+
+    <!-- Rest of your content here -->
+  </body>
+</html>
