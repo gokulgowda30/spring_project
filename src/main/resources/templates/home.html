@@ -38,6 +38,7 @@
       <a href="/login"><button>Login</button></a>
     </div>
     <h3 style="color: greenyellow" th:text="${success}"></h3>
+    <h3 style="color: red" th:text="${failure}"></h3>
     <div class="" th:if="${session.user}">
       <!--If there is a user in the session the execute this-->
       <a href="/insert"><button>Student Record</button></a>

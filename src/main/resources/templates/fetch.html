@@ -4,43 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>4 Boxes Layout</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f2f2f2;
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        display: flex;
-        flex-wrap: wrap;
-        width: 50%;
-        max-width: 600px;
-        gap: 10px;
-      }
-      .box {
-        flex: 1 1 calc(50% - 10px);
-        height: 150px;
-        background-color: #4caf50;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <form action="/fetch" method="post"></form>
-    <div class="container">
-      <div class="box">Box 1</div>
-      <div class="box">Box 2</div>
-      <div class="box">Box 3</div>
-      <div class="box">Box 4</div>
-    </div>
+    <!-- <h1 th:text="${list}"></h1> -->
+    <h3 style="color: red" th:text="${failure}"></h3>
+    <table border="2px">
+      <tr>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">Picture</th>
+        <th rowspan="2">Standard</th>
+        <th rowspan="2">Date Of Birth</th>
+        <th rowspan="2">Mobile Number</th>
+        <th colspan="6">Marks</th>
+        <th rowspan="2">Percentage</th>
+        <th rowspan="2">Edit</th>
+        <th rowspan="2">Delete</th>
+      </tr>
+      <tr>
+        <th>Subject1</th>
+        <th>Subject2</th>
+        <th>Subject3</th>
+        <th>Subject4</th>
+        <th>Subject5</th>
+        <th>Subject6</th>
+      </tr>
+      <tr th:each="s:${list}">
+        <td th:text="${s.name}"></td>
+        <td>
+          <img th:src="${s.picture}" alt="alt" width="100px" height="100px" />
+        </td>
+        <td th:text="${s.standard}"></td>
+        <td th:text="${s.dob}"></td>
+        <td th:text="${s.mobile}"></td>
+        <td th:text="${s.subject1}"></td>
+        <td th:text="${s.subject2}"></td>
+        <td th:text="${s.subject3}"></td>
+        <td th:text="${s.subject4}"></td>
+        <td th:text="${s.subject5}"></td>
+        <td th:text="${s.subject6}"></td>
+        <td th:text="${s.getPercentage}"></td>
+        <td><button>Edit</button></td>
+        <td>
+          <a th:href="'delete?id='+${s.id}"><button>Delete</button></a>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
+<!-- -->

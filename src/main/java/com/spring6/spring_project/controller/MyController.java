@@ -2,6 +2,7 @@ package com.spring6.spring_project.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -180,10 +181,36 @@ public class MyController {
         }
     }
 
-@GetMapping("/fetch")
-public String fetch(HttpSession session,ModelMap map){
+    @GetMapping("/fetch")
+    public String fetchall(HttpSession session,ModelMap map){
+        if(session.getAttribute("user") != null){
+            List<Student> list=studentJpa.findAll();
+            if(list.isEmpty()){
+                map.put("failure", "No Data Found");
+                return "home.html";
+            }else{
+                map.put("list", list);
+                return "fetch.html";
+            }
+        }else{
+            map.put("failure", "No session");
+            return "home.html";
+        }
+    }
+
+@GetMapping("/delete")
+public String delete1(@RequestParam int id,HttpSession session,ModelMap map){
     if(session.getAttribute("user")!=null){
-        return "fetch.html";
+        Student id1=studentJpa.findById(id).orElse(null);
+        if(id1==null){
+            map.put("failure", "ID not found");
+            return "fetch.html";
+        }else{
+            studentJpa.delete(id1);
+            map.put("success", "ID deleted Successfully");   
+            return "home.html";
+        }
+        
     }else{
         map.put("failure", "Invalid Session");
         return "login.html";
@@ -192,16 +219,6 @@ public String fetch(HttpSession session,ModelMap map){
 
 @GetMapping("/update")
 public String update(HttpSession session,ModelMap map){
-    if(session.getAttribute("user")!=null){
-        return "update.html";
-    }else{
-        map.put("failure", "Invalid Session");
-        return "login.html";
-    }
-}
-
-@GetMapping("/delete")
-public String delete(HttpSession session,ModelMap map){
     if(session.getAttribute("user")!=null){
         return "delete.html";
     }else{
@@ -243,4 +260,7 @@ public String addToCloudinary(MultipartFile image) {
 		}
 		return (String) resume.get("url");
 	}
+
+    
 }
+//<td th:text="{{s.subject1+s.subject2+s.subject3+s.subject4+s.subject5+s.subject6}}"></td> 
