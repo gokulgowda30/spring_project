@@ -7,50 +7,59 @@
     <style></style>
   </head>
   <body>
-    <form action="/fetch" method="post"></form>
     <!-- <h1 th:text="${list}"></h1> -->
-    <h3 style="color: red" th:text="${failure}"></h3>
-    <table border="2px">
-      <tr>
-        <th rowspan="2">Name</th>
-        <th rowspan="2">Picture</th>
-        <th rowspan="2">Standard</th>
-        <th rowspan="2">Date Of Birth</th>
-        <th rowspan="2">Mobile Number</th>
-        <th colspan="6">Marks</th>
-        <th rowspan="2">Percentage</th>
-        <th rowspan="2">Edit</th>
-        <th rowspan="2">Delete</th>
-      </tr>
-      <tr>
-        <th>Subject1</th>
-        <th>Subject2</th>
-        <th>Subject3</th>
-        <th>Subject4</th>
-        <th>Subject5</th>
-        <th>Subject6</th>
-      </tr>
-      <tr th:each="s:${list}">
-        <td th:text="${s.name}"></td>
-        <td>
-          <img th:src="${s.picture}" alt="alt" width="100px" height="100px" />
-        </td>
-        <td th:text="${s.standard}"></td>
-        <td th:text="${s.dob}"></td>
-        <td th:text="${s.mobile}"></td>
-        <td th:text="${s.subject1}"></td>
-        <td th:text="${s.subject2}"></td>
-        <td th:text="${s.subject3}"></td>
-        <td th:text="${s.subject4}"></td>
-        <td th:text="${s.subject5}"></td>
-        <td th:text="${s.subject6}"></td>
-        <td th:text="${s.getPercentage}"></td>
-        <td><button>Edit</button></td>
-        <td>
-          <a th:href="'delete?id='+${s.id}"><button>Delete</button></a>
-        </td>
-      </tr>
-    </table>
+    <div align="center">
+      <h3 style="color: green" th:text="${success}"></h3>
+      <h3 style="color: red" th:text="${failure}"></h3>
+      <table border="2px">
+        <tr>
+          <th rowspan="2">Name</th>
+          <th rowspan="2">Picture</th>
+          <th rowspan="2">Standard</th>
+          <th rowspan="2">Date Of Birth</th>
+          <th rowspan="2">Mobile Number</th>
+          <th colspan="6">Marks</th>
+          <th rowspan="2">Percentage</th>
+          <th rowspan="2">Edit</th>
+          <th rowspan="2">Delete</th>
+        </tr>
+        <tr>
+          <th>Subject1</th>
+          <th>Subject2</th>
+          <th>Subject3</th>
+          <th>Subject4</th>
+          <th>Subject5</th>
+          <th>Subject6</th>
+        </tr>
+        <tr th:each="s:${list}">
+          <td th:text="${s.name}"></td>
+          <td>
+            <img th:src="${s.picture}" alt="alt" width="100px" height="100px" />
+          </td>
+          <td th:text="${s.standard}"></td>
+          <td th:text="${s.dob}"></td>
+          <td th:text="${s.mobile}"></td>
+          <td th:text="${s.subject1}"></td>
+          <td th:text="${s.subject2}"></td>
+          <td th:text="${s.subject3}"></td>
+          <td th:text="${s.subject4}"></td>
+          <td th:text="${s.subject5}"></td>
+          <td th:text="${s.subject6}"></td>
+          <td th:text="${s.getPercentage}"></td>
+          <td>
+            <a th:href="'/edit/'+${s.id}"><button>Edit</button></a>
+          </td>
+          <td>
+            <!--Using @RequestParam,And for constants we should write in single codes and concatenate eg: 'delete?id='-->
+            <!-- <a th:href="'delete?id='+${s.id}"><button>Delete</button></a>-->
+            <a th:href="'/delete/'+${s.id}"><button>Delete</button></a>
+            <!--Using path variable-->
+          </td>
+        </tr>
+      </table>
+      <button type="button"></button>
+      <a href="/"><button>Back</button></a>
+    </div>
   </body>
 </html>
 <!-- -->

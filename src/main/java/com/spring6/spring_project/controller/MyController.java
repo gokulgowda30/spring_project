@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.RequestBody;
@@ -198,34 +199,61 @@ public class MyController {
         }
     }
 
-@GetMapping("/delete")
-public String delete1(@RequestParam int id,HttpSession session,ModelMap map){
-    if(session.getAttribute("user")!=null){
-        Student id1=studentJpa.findById(id).orElse(null);
-        if(id1==null){
-            map.put("failure", "ID not found");
-            return "fetch.html";
-        }else{
-            studentJpa.delete(id1);
-            map.put("success", "ID deleted Successfully");   
-            return "home.html";
-        }
+// @GetMapping("/delete")
+// public String delete1(@RequestParam int id,HttpSession session,ModelMap map){
+//     if(session.getAttribute("user")!=null){
+//         Student id1=studentJpa.findById(id).orElse(null);
+//         if(id1==null){
+//             map.put("failure", "ID not found");
+//             return "fetch.html";
+//         }else{
+//             studentJpa.delete(id1);
+//             map.put("success", "ID deleted Successfully");   
+//             return "home.html";
+//         }
         
-    }else{
-        map.put("failure", "Invalid Session");
-        return "login.html";
-    }
-}
+//     }else{
+//         map.put("failure", "Invalid Session");
+//         return "login.html";
+//     }
+// }
 
-@GetMapping("/update")
-public String update(HttpSession session,ModelMap map){
-    if(session.getAttribute("user")!=null){
-        return "delete.html";
-    }else{
-        map.put("failure", "Invalid Session");
-        return "login.html";
+@GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id, HttpSession session, ModelMap map) {
+        if (session.getAttribute("user") != null) {
+            studentJpa.deleteById(id);
+            map.put("success", "Record Delete Success");
+            return fetchall(session, map);
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
     }
-}
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable int id, HttpSession session, ModelMap map){
+        if (session.getAttribute("user") != null) {
+           Student student=studentJpa.findById(id).orElseThrow();
+           map.put("student", student);
+           return "update.html";
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
+    }
+
+    @PostMapping("/update")
+    public String update(Student student, HttpSession session, ModelMap map, @RequestParam MultipartFile image) {
+        if (session.getAttribute("user") != null) {
+            student.setPicture(addToCloudinary(image));
+            studentJpa.save(student);
+            map.put("success", "Record Updated Successfully");
+            return fetchall(session, map);
+        } else {
+            map.put("failure", "Invalid session");
+            return "login.html";
+        }
+    }
 
 @PostMapping("/insert")
 //@ResponseBody
