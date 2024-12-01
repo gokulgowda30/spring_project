@@ -3,15 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fetch All</title>
-    <style></style>
+    <title>Student Records</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+        text-align: center;
+        margin: 10px 0;
+      }
+
+      .success {
+        color: #2ecc71;
+      }
+      .failure {
+        color: #e74c3c;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #34495e;
+        color: white;
+        font-weight: 500;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f5f5f5;
+      }
+
+      img {
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #3498db;
+      }
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      .edit-btn {
+        background-color: #3498db;
+        color: white;
+      }
+
+      .delete-btn {
+        background-color: #e74c3c;
+        color: white;
+      }
+
+      .back-btn {
+        background-color: #2c3e50;
+        color: white;
+        margin-top: 20px;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .edit-btn:hover {
+        background-color: #2980b9;
+      }
+      .delete-btn:hover {
+        background-color: #c0392b;
+      }
+      .back-btn:hover {
+        background-color: #234567;
+      }
+    </style>
   </head>
   <body>
-    <!-- <h1 th:text="${list}"></h1> -->
-    <div align="center">
-      <h3 style="color: green" th:text="${success}"></h3>
-      <h3 style="color: red" th:text="${failure}"></h3>
-      <table border="2px">
+    <div class="container">
+      <h3 class="success" th:text="${success}"></h3>
+      <h3 class="failure" th:text="${failure}"></h3>
+
+      <table>
         <tr>
           <th rowspan="2">Name</th>
           <th rowspan="2">Picture</th>
@@ -20,21 +123,20 @@
           <th rowspan="2">Mobile Number</th>
           <th colspan="6">Marks</th>
           <th rowspan="2">Percentage</th>
-          <th rowspan="2">Edit</th>
-          <th rowspan="2">Delete</th>
+          <th rowspan="2">Actions</th>
         </tr>
         <tr>
-          <th>Subject1</th>
-          <th>Subject2</th>
-          <th>Subject3</th>
-          <th>Subject4</th>
-          <th>Subject5</th>
-          <th>Subject6</th>
+          <th>Subject 1</th>
+          <th>Subject 2</th>
+          <th>Subject 3</th>
+          <th>Subject 4</th>
+          <th>Subject 5</th>
+          <th>Subject 6</th>
         </tr>
         <tr th:each="s:${list}">
           <td th:text="${s.name}"></td>
           <td>
-            <img th:src="${s.picture}" alt="alt" width="100px" height="100px" />
+            <img th:src="${s.picture}" alt="Student" width="100" height="100" />
           </td>
           <td th:text="${s.standard}"></td>
           <td th:text="${s.dob}"></td>
@@ -47,19 +149,19 @@
           <td th:text="${s.subject6}"></td>
           <td th:text="${s.getPercentage}"></td>
           <td>
-            <a th:href="'/edit/'+${s.id}"><button>Edit</button></a>
-          </td>
-          <td>
-            <!--Using @RequestParam,And for constants we should write in single codes and concatenate eg: 'delete?id='-->
-            <!-- <a th:href="'delete?id='+${s.id}"><button>Delete</button></a>-->
-            <a th:href="'/delete/'+${s.id}"><button>Delete</button></a>
-            <!--Using path variable-->
+            <a th:href="'/edit/'+${s.id}"
+              ><button class="edit-btn">Edit</button></a
+            >
+            <a th:href="'/delete/'+${s.id}"
+              ><button class="delete-btn">Delete</button></a
+            >
           </td>
         </tr>
       </table>
-      <button type="button"></button>
-      <a href="/"><button>Back</button></a>
+
+      <div style="text-align: center">
+        <a href="/"><button class="back-btn">Back</button></a>
+      </div>
     </div>
   </body>
 </html>
-<!-- -->

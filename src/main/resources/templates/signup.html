@@ -3,89 +3,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup Form</title>
+    <title>Modern Signup Form</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
       body {
-        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        margin: 0;
-        background-color: #f2f2f2;
-      }
-      .signup-form {
-        background-color: #ffffff;
         padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
       }
-      .signup-form h2 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .signup-form label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      .signup-form input {
-        width: calc(
-          100% - 22px
-        ); /* Adjust width to account for padding and border */
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-      }
-      .signup-form button {
+
+      .signup-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         width: 100%;
-        padding: 10px;
-        background-color: #4caf50;
-        color: white;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        font-size: 16px;
+        max-width: 450px;
       }
-      .signup-form button:hover {
-        background-color: #45a049;
+
+      .signup-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .signup-header h2 {
+        color: #333;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+        font-weight: 500;
+        font-size: 0.9em;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e1e1;
+        border-radius: 10px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+      }
+
+      .form-group input:focus {
+        border-color: #667eea;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .error-message {
+        color: #e74c3c;
+        font-size: 0.85em;
+        margin-top: 5px;
+        display: block;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      @media (max-width: 480px) {
+        .signup-container {
+          padding: 20px;
+        }
       }
     </style>
   </head>
   <body>
-    <form
-      class="signup-form"
-      action="/signup"
-      method="POST"
-      th:object="${myUser}"
-    >
-      <!--We use th:object="${myUser} to receive the object we use th:object="${myUser}-->
-      <h2>Signup</h2>
-      <label for="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        th:field="*{name}"
-      /><!-- to display previous data th:field="*{name}-->
-      <span th:errors="*{name}"></span>
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" th:field="*{email}" />
-      <span th:errors="*{email}"></span
-      ><!--To accept the msg from backed and to display error msg we use th:errors="*{email}-->
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        th:field="*{password}"
-      />
-      <span th:errors="*{password}"></span>
+    <div class="signup-container">
+      <div class="signup-header">
+        <h2>Sign Up</h2>
+        <p>Create your account</p>
+      </div>
 
-      <button type="submit">Signup</button>
-    </form>
+      <form action="/signup" method="POST" th:object="${myUser}">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            th:field="*{name}"
+            placeholder="Enter your name"
+          />
+          <span class="error-message" th:errors="*{name}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            th:field="*{email}"
+            placeholder="Enter your email"
+          />
+          <span class="error-message" th:errors="*{email}"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            th:field="*{password}"
+            placeholder="Create a password"
+          />
+          <span class="error-message" th:errors="*{password}"></span>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+    </div>
   </body>
 </html>
